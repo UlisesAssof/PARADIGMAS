@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aplicación móvil para organizar partidas de búsqueda del tesoro.">
+  <title>Búsqueda del tesoro</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+
+    <!-- PANTALLA 1: INICIO DE SESIÓN -->
+    <section id="pantalla-login" aria-labelledby="titulo-login">
+      <header>
+        <h1 id="titulo-login">Búsqueda del tesoro</h1>
+        <p>Iniciá sesión para continuar.</p>
+      </header>
+      <form id="form-login">
+        <div>
+          <label for="login-usuario">Usuario</label>
+          <input type="text" id="login-usuario" name="usuario" autocomplete="username" required>
+        </div>
+        <div>
+          <label for="login-contrasena">Contraseña</label>
+          <input type="password" id="login-contrasena" name="contrasena" autocomplete="current-password" required>
+        </div>
+        <p id="mensaje-login" role="status" aria-live="polite"></p>
+        <button type="submit">Iniciar sesión</button>
+      </form>
+      <p>¿No tenés una cuenta? <button type="button" id="ir-a-registro">Crear una cuenta</button></p>
+    </section>
+
+    <!-- PANTALLA 2: REGISTRO -->
+    <section id="pantalla-registro" aria-labelledby="titulo-registro" hidden>
+      <header>
+        <h1 id="titulo-registro">Crear cuenta</h1>
+        <p>Registrate para empezar a jugar.</p>
+      </header>
+      <form id="form-registro">
+        <div>
+          <label for="registro-usuario">Nombre de usuario</label>
+          <input type="text" id="registro-usuario" name="usuario" autocomplete="username" minlength="3" required>
+        </div>
+        <div>
+          <label for="registro-contrasena">Contraseña</label>
+          <input type="password" id="registro-contrasena" name="contrasena" autocomplete="new-password" minlength="8" required>
+        </div>
+        <div>
+          <label for="registro-confirmar-contrasena">Confirmar contraseña</label>
+          <input type="password" id="registro-confirmar-contrasena" name="confirmar-contrasena" autocomplete="new-password" minlength="8" required>
+        </div>
+        <p id="mensaje-registro" role="status" aria-live="polite"></p>
+        <button type="submit">Crear cuenta</button>
+      </form>
+      <p>¿Ya tenés una cuenta? <button type="button" id="volver-a-login">Volver al inicio de sesión</button></p>
+    </section>
+
+    <!-- PANTALLA 3: INICIO DEL JUGADOR -->
+    <section id="pantalla-inicio" aria-labelledby="titulo-inicio" hidden>
+      <header>
+        <div>
+          <button type="button" id="abrir-perfil" aria-label="Abrir perfil"><span aria-hidden="true">👤</span></button>
+          <span id="nombre-usuario">Usuario</span>
+        </div>
+        <p>Puntos totales: <strong id="total-puntos">0</strong></p>
+      </header>
+      <div>
+        <h1 id="titulo-inicio">¡Preparado para la aventura!</h1>
+        <p>Creá una partida o unite a una existente.</p>
+        <button type="button" id="empezar-a-jugar">Empezar a jugar</button>
+      </div>
+    </section>
+
+    <!-- PANTALLA 4: MENÚ DE PARTIDAS -->
+    <section id="pantalla-menu-partidas" aria-labelledby="titulo-menu-partidas" hidden>
+      <header>
+        <h1 id="titulo-menu-partidas">Partidas</h1>
+        <p>¿Cómo querés jugar?</p>
+      </header>
+      <button type="button" id="ir-a-crear-partida">Crear partida</button>
+      <button type="button" id="ir-a-unirse-partida">Unirse</button>
+      <button type="button" id="volver-a-inicio">Volver al inicio</button>
+    </section>
+
+    <!-- PANTALLA AUXILIAR: CREAR PARTIDA -->
+    <section id="pantalla-crear-partida" aria-labelledby="titulo-crear-partida" hidden>
+      <header>
+        <h1 id="titulo-crear-partida">Crear partida</h1>
+        <p>Se generará un código para compartir con los demás jugadores.</p>
+      </header>
+      <form id="form-crear-partida">
+        <div>
+          <label for="nombre-partida">Nombre de la partida (opcional)</label>
+          <input type="text" id="nombre-partida" name="nombre-partida" maxlength="40">
+        </div>
+        <button type="submit">Crear sala</button>
+      </form>
+      <div id="resultado-partida" hidden>
+        <p>Código de la partida:</p>
+        <strong id="codigo-partida"></strong>
+        <p>Compartí este código con quienes quieran unirse.</p>
+      </div>
+      <button type="button" id="volver-menu-desde-crear">Volver</button>
+    </section>
+
+    <!-- PANTALLA AUXILIAR: UNIRSE A UNA PARTIDA -->
+    <section id="pantalla-unirse-partida" aria-labelledby="titulo-unirse-partida" hidden>
+      <header>
+        <h1 id="titulo-unirse-partida">Unirse a una partida</h1>
+        <p>Ingresá el código que te compartieron.</p>
+      </header>
+      <form id="form-unirse-partida">
+        <div>
+          <label for="codigo-para-unirse">Código de la partida</label>
+          <input type="text" id="codigo-para-unirse" name="codigo" autocomplete="off" maxlength="12" required>
+        </div>
+        <p id="mensaje-unirse" role="status" aria-live="polite"></p>
+        <button type="submit">Unirme</button>
+      </form>
+      <button type="button" id="volver-menu-desde-unirse">Volver</button>
+    </section>
+
+    <!-- PANTALLA AUXILIAR: PERFIL -->
+    <section id="pantalla-perfil" aria-labelledby="titulo-perfil" hidden>
+      <header><h1 id="titulo-perfil">Mi perfil</h1></header>
+      <p>Usuario: <strong id="perfil-nombre-usuario">Usuario</strong></p>
+      <p>Puntos totales: <strong id="perfil-total-puntos">0</strong></p>
+      <button type="button" id="cerrar-perfil">Volver</button>
+      <button type="button" id="cerrar-sesion">Cerrar sesión</button>
+    </section>
+
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>
